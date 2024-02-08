@@ -1,4 +1,11 @@
-import { Link, NavLink, Route, Routes, useRoutes } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useRoutes,
+} from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import BookList from "./pages/BookList";
@@ -11,6 +18,19 @@ import BookLayout from "./pages/BookLayout";
 import BooksRoutes from "./pages/BooksRoutes";
 
 function App() {
+  const location = useLocation();
+  // ------------------> this location have <----------------
+  // {
+  //   hash:'',
+  //   key:'',
+  //   pathname:'',
+  //   search:'',
+  //   state:'hi'
+
+  // }
+
+  console.log("location-> ", location);
+
   let element = useRoutes([
     {
       path: "/",
@@ -42,7 +62,18 @@ function App() {
           <ul>
             <li>
               {/* reloadDocument:-> reload the entire document */}
-              <NavLink to="/" reloadDocument>
+              <NavLink
+                // style={({ isActive }) => {
+                //   return isActive ? { color: "red" } : {};
+                // }}
+                to="/"
+                reloadDocument
+                state={"hi"}
+              >
+                {/* ------------> IsActive <----------- */}
+                {/* {({ isActive }) => {
+                  return isActive ? "Active Home" : "Home";
+                }} */}
                 Home
               </NavLink>
               {/* <Link to="/" reloadDocument>
@@ -50,7 +81,10 @@ function App() {
               </Link> */}
             </li>
             <li>
-              <NavLink to="/books">Books</NavLink>
+              {/*---------->(end):  Matches the end route <------------- */}
+              <NavLink end to="/books">
+                Books
+              </NavLink>
             </li>
           </ul>
         </nav>
